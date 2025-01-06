@@ -330,7 +330,9 @@ async function verifyForgotPassword(request, response) {
         const user = await User.findOne({email})
         if(!user){
             return response.status(400).json({
-                message: ""
+                message: "Email not found",
+                error: true,
+                success: false
             })
         }
 

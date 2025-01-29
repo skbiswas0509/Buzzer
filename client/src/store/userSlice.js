@@ -1,28 +1,27 @@
-import {createSlice} from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialValue = {
-    _id: "",
+    _id : "",
     name : "",
     email : "",
-    avatat: "",
-    mobile: "",
-    verify_email: "",
-    last_login_date: "",
-    status: "",
-    address_details: [],
+    avatar : "",
+    mobile : "",
+    verify_email : "",
+    last_login_date : "",
+    status : "",
+    address_details : [],
     shopping_cart : [],
-    orderHistory: [],
-    role : ""
+    orderHistory : [],
+    role : "",
 }
 
-
-const userSlice = createSlice({
-    name: 'user',
-    initialState: initalValue,
+const userSlice  = createSlice({
+    name : 'user',
+    initialState : initialValue,
     reducers : {
-        setUserDetail : (state, action) => {
+        setUserDetails : (state,action) =>{
             state._id = action.payload?._id
-            state.anme = action.payload?.name
+            state.name  = action.payload?.name
             state.email = action.payload?.email
             state.avatar = action.payload?.avatar
             state.mobile = action.payload?.mobile
@@ -34,15 +33,12 @@ const userSlice = createSlice({
             state.orderHistory = action.payload?.orderHistory
             state.role = action.payload?.role
         },
-<<<<<<< HEAD
         updatedAvatar : (state,action)=>{
             state.avatar = action.payload
         },
-=======
->>>>>>> 444449e2c771079ff9ebde15df7ca178b4916155
-        logout : (state, action) => {
+        logout : (state,action)=>{
             state._id = ""
-            state.anme = ""
+            state.name  = ""
             state.email = ""
             state.avatar = ""
             state.mobile = ""
@@ -52,15 +48,11 @@ const userSlice = createSlice({
             state.address_details = []
             state.shopping_cart = []
             state.orderHistory = []
-            state.role = "action.payload?.role"
-        }
+            state.role = ""
+        },
     }
 })
 
-<<<<<<< HEAD
-export const { setUserDetails ,logout, updatedAvatar } = userSlice.actions
-=======
-export const { setUserDetails ,logout } = userSlice.actions
->>>>>>> 444449e2c771079ff9ebde15df7ca178b4916155
+export const { setUserDetails, logout ,updatedAvatar} = userSlice.actions
 
-export default  userSlice.reducer
+export default userSlice.reducer

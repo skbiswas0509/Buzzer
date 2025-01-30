@@ -33,39 +33,22 @@ const UserMenu = ({close}) => {
         AxiosToastError(error)
       }
     }
-
-<<<<<<< HEAD
-    const handleClose = ()=>{
-      if(close){
-        close()
-      }
-    }
-
-=======
->>>>>>> 444449e2c771079ff9ebde15df7ca178b4916155
   return (
     <div>
         <div className='font-semibold'>My Account</div>
         <div className='text-sm flex items-center gap-2'>
           <span className='max-w-52 text-ellipsis line-clamp-1'>{user.name || user.mobile}</span> 
-<<<<<<< HEAD
-          <Link onClick={handleClose} to={"/dashboard/profile"}><FiExternalLink size={15} className='hover: text-primary-200'/>
-=======
-          <Link to={"/dashboard/profile"}><FiExternalLink size={15} className='hover: text-primary-200'/>
->>>>>>> 444449e2c771079ff9ebde15df7ca178b4916155
-          </Link>
+          <Link onClick={handleClose} to={"/dashboard/profile"}><FiExternalLink size={15} className='hover: text-primary-200'/></Link>
+            <Link to={"/dashboard/profile"}><FiExternalLink size={15} className='hover: text-primary-200'/></Link>
         </div>
-        
         <Divider/>
-
         <div className='text-sm grid gap-1'>
-<<<<<<< HEAD
+            <Link onClick={handleClose} to={"/dashboard/category"} className='px-2 hover:bg-orange-200 py-1'>Category</Link>
+            <Link onClick={handleClose} to={"/dashboard/subcategory"} className='px-2 hover:bg-orange-200 py-1'>Sub Category</Link>
+            <Link onClick={handleClose} to={"/dashboard/upload-category"} className='px-2 hover:bg-orange-200 py-1'>Upload Product</Link>
+            <Link onClick={handleClose} to={"/dashboard/products"} className='px-2 hover:bg-orange-200 py-1'>Product</Link>
             <Link onClick={handleClose} to={"/dashboard/myorders"} className='px-2 hover:bg-orange-200 py-1'>My Orders</Link>
             <Link onClick={handleClose} to={"/dashboard/address"} className='px-2 hover:bg-orange-200 py-1'>Address</Link>
-=======
-            <Link to={"/dashboard/myorders"} className='px-2 hover:bg-orange-200 py-1'>My Orders</Link>
-            <Link to={"/dashboard/address"} className='px-2 hover:bg-orange-200 py-1'>Address</Link>
->>>>>>> 444449e2c771079ff9ebde15df7ca178b4916155
             <button onClick={handleLogOut} className='text-left px-2'>Log Out</button>
         </div>
     </div>

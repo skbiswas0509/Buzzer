@@ -7,6 +7,8 @@ import helmet from 'helmet'
 dotenv.config()
 import connectDB from './config/connectDB.js'
 import userRouter from './routes/user.route.js'
+import categoryRouter from './routes/category.route.js'
+import uploadRouter from './routes/upload.router.js'
 
 const app = express()
 app.use(cors({
@@ -30,6 +32,9 @@ app.get("/", (request, response)=>{
 })
 
 app.use("/api/user", userRouter)
+app.use("/api/category",categoryRouter)
+app.use("/file",uploadRouter)
+
 
 connectDB().then(() =>{
     app.listen(PORT, ()=>{

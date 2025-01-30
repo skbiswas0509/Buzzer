@@ -32,7 +32,6 @@ const SummaryApi = {
     logout: {
         url : "/api/user/logout",
         method : 'get'
-<<<<<<< HEAD
     },
     uploadAvatar : {
         url : "/api/user/upload-avatar",
@@ -41,8 +40,11 @@ const SummaryApi = {
     updateUserDetails : {
         url : '/api/user/update-user',
         methhod : 'put'
-=======
->>>>>>> 444449e2c771079ff9ebde15df7ca178b4916155
+
+    },
+    addCategory: {
+        url : "/api/cate/add-category",
+        method: "post"
     }
 }
 

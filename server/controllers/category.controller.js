@@ -39,3 +39,21 @@ export const addCategoryController= async(request, response)=>{
         })
     }
 }
+
+export const getCategoryController = async(request, response)=>{
+    try {
+        const data = await CategoryModel.find()
+
+        return response.json({
+            data: data,
+            error: false,
+            success: true
+        })
+    } catch (error) {
+        return response.statue(500).json({
+            message: error.message || message,
+            error: true,
+            success: false
+        })
+    }
+} 

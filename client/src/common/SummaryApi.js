@@ -39,7 +39,7 @@ const SummaryApi = {
     },
     updateUserDetails : {
         url : '/api/user/update-user',
-        methhod : 'put'
+        method : 'put'
 
     },
     addCategory: {
@@ -53,8 +53,15 @@ const SummaryApi = {
     getCategory :{
         url : "/api/category/get",
         method: "get"
+    },
+    updateCategory :{
+        url: "/api/category/update",
+        method: "put"
+    },
+    deleteCatefogr :{
+        url: "/api/category/delete",
+        method: "delete"
     }
- 
 }
 
 export default {SummaryApi, baseURL}

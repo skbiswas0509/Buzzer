@@ -7,6 +7,7 @@ import SummaryApi from '../common/SummaryApi'
 import EditCategory from '../components/EditCategory'
 import ConfirmBox from '../components/ConfirmBox'
 import AxiosToastError from '../utils/AxiosToastError'
+import { useSelector } from 'react-redux'
 
 const CategoryPage = () => {
   const [openUploadCategory, setOpenUploadCategory] = useState(false)
@@ -22,27 +23,32 @@ const CategoryPage = () => {
     _id : ""
   })
 
-  const fetchCategory = async()=>{
-    try {
-      setLoading(true) 
-      const response = await Axios({
-        ...SummaryApi.getCatgory
-      })   
-      const {data : responseData} = response
-
-      if(responseData.success){
-        setCategoryData(responseData.data)
-      }
-    } catch (error) {
-      
-    }finally{
-      setLoading(false)
-    }
-  }
+  const allCategory = useSelector(state=>state.product.allCategory)
 
   useEffect(()=>{
-    fetchCategory()
-  },[])
+    setCategoryData(allCategory)
+  },[allCategory])
+  // const fetchCategory = async()=>{
+  //   try {
+  //     setLoading(true) 
+  //     const response = await Axios({
+  //       ...SummaryApi.getCatgory
+  //     })   
+  //     const {data : responseData} = response
+
+  //     if(responseData.success){
+  //       setCategoryData(responseData.data)
+  //     }
+  //   } catch (error) {
+      
+  //   }finally{
+  //     setLoading(false)
+  //   }
+  // }
+
+  // useEffect(()=>{
+  //   fetchCategory()
+  // },[])
 
   const handleDelete = async()=>{
     try {
@@ -66,7 +72,7 @@ const CategoryPage = () => {
     <section>
       <div className='p-2 bg-white shadow-md flex items-center justify-between'>
         <h2 className='font-semibold'>Category</h2>
-        <button onClick={()=>setOpenUploadCategory(true)} className='text-sm border-x-primary-200 hover:bg-primary-200 px-3 py-1 rounded'>Add Cateogry</button>
+        <button onClick={()=>setOpenUploadCategory(true)} className='text-sm border-primary-200 hover:bg-primary-200 px-3 py-1 rounded'>Add Cateogry</button>
       </div>
       {
         !categoryData[0] && !loading && (

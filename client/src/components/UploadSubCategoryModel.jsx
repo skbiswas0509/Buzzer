@@ -2,6 +2,11 @@ import React, { useState } from 'react'
 import { IoClose } from "react-icons/io5";
 import uploadImage from '../utils/UploadImage';
 import { useSelector } from 'react-redux';
+import { IoCloseSharp } from "react-icons/io5";
+import Axios from '../utils/Axios';
+import SummaryApi from '../common/SummaryApi';
+import toast from 'react-hot-toast';
+import AxiosToastError from '../utils/AxiosToastError';
 
 const UploadSubCategoryModel = ({ close }) => {
     const [subCategoryData, setSubCategoryData] = useState({
@@ -38,6 +43,36 @@ const UploadSubCategoryModel = ({ close }) => {
             }
         })
     }
+
+    const handleSubmitSubCategory =  async(e)=>{
+        e.preventDefault()
+        try {
+            const response = await Axios({
+                ...SummaryApi.createSubCategory,
+                data: subCategoryData
+            })
+
+            const {data: responseData} =response
+            if(responseData.success){
+                toast.success(responseData.success)
+                if(close){
+                    close()
+                }
+            }
+        } catch (error) {
+            AxiosToastError(error)
+        }
+    }
+
+    const handleRemoveCategorySelected = (categoryId)=>{
+        const index = subCategoryData.category.findIndex(e1 => e1._id === categoryId)
+        subCategoryData.category.splice(index,1)
+        setSubCategoryData((preve)=>{
+            return {
+                ...preve
+            }
+        })
+    }
     return (
 
         <section className='fixed top-0 right-0 bottom-0 left-0  bg-neutral-800 bg-opacity-70 z-50 flex items-center justify-center p-4'>
@@ -48,7 +83,7 @@ const UploadSubCategoryModel = ({ close }) => {
                         <IoClose size={25} />
                     </button>
                 </div>
-                <form action="" className='my-3 grid gap-3'>
+                <form action="" className='my-3 grid gap-3' onSubmit={handleSubmitSubCategory}>
                     <div className='grid gap-1'>
                         <label htmlFor="name">Name</label>
                         <input id='name' name='name' value={subCategoryData.name} onClick={handleChange} className='p-3 bg-blue-50 border outline-none focus-within:border-x-primary-200
@@ -85,9 +120,22 @@ const UploadSubCategoryModel = ({ close }) => {
                         <label>Select category</label>
                         <div className='border focus:within:border-primary-200 rounded'>
                             {/* display value */}
-
+                            <div className='flex float-wrap'>
+                                {
+                                subCategoryData.category.map((cat,index)=>{
+                                    return(
+                                        <p key={cat._id+"selectedValue"} className='bg-white shadow-md px-1 m-1 flex items-center gap-2'>
+                                            {cat.name}
+                                            <div className='cursor-pointer hover:text-red-600' onClick={()=>handleRemoveCategorySelected(cat._id)}>
+                                                <IoCloseSharp size={20}/>
+                                            </div>
+                                        </p>
+                                    )
+                                })
+                                }
+                            </div>
                             {/* select category */}
-                            <select className='w-full p-2 bg-transparent outline-none'
+                            <select className='w-full p-2 bg-transparent outline-none border'
                             onChange={(e)=>{
                                 const value = e.target.value
                                 const categoryDetails = allCategory.find(e1 => e1._id == value)
@@ -99,7 +147,7 @@ const UploadSubCategoryModel = ({ close }) => {
                                     }
                                 })
                             }}>
-                                <option value={""} disabled>Select Category</option>
+                                <option value={""}>Select Category</option>
                                 {
                                     allCategory.map((category,index)=>{
                                         return(
@@ -111,6 +159,10 @@ const UploadSubCategoryModel = ({ close }) => {
                         </div>
                     </div>
 
+                    <button className={`px-4 py-1 border
+                        ${subCategoryData?.name && subCategoryData?.image && subCategoryData?.category[0] ? "bg-primary-200 hover:bg-primary-100" : "bg-gray-200"}
+                        font-semibold
+                    `}>Submit</button>
                 </form>
             </div>
         </section>

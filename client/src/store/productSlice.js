@@ -3,7 +3,7 @@ import SubCategory from "../pages/SubCategory"
 
 const initialValue = {
     allCategory : [],
-    SubCategory : [],
+    allSubCategory : [],
     product : []
 }
 
@@ -13,10 +13,13 @@ const productSlice = createSlice({
     reducers : {
         setAllCategory : (state,action)=>{
             state.allCategory = [...action.payload]
+        },
+        setAllSubCategory : (state,action)=>{
+            state.allSubCategory = [...action.payload]
         }
     }
 })
 
-export const { setAllCategory } = productSlice.actions
+export const { setAllCategory, setAllSubCategory } = productSlice.actions
 
 export default productSlice.reducer

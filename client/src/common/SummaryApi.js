@@ -81,6 +81,10 @@ const SummaryApi = {
     createProduct : {
         url : '/api/product/create',
         method : "post"
+    },
+    getProduct : {
+        url : "/api/product/get",
+        method : "get"
     }
 }
 

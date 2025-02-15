@@ -4,6 +4,7 @@ import banner_mobile from '../assets/banner_mobile.jpg'
 import { useSelector } from 'react-redux'
 import { validURLConvert } from '../utils/validURLConvert'
 import { Link, useNavigate } from 'react-router-dom'
+import CategoryWiseProductDisplay from '../components/CategoryWiseProductDisplay'
 
 const Home = () => {
   const loadinCategory = useSelector(state=> state.product.loadingCatgory)
@@ -60,15 +61,12 @@ const Home = () => {
       </div>
 
       {/* display category product */}
-      <div>
-        <div className='container mx-auto p-4 flex items-center justify-between gap-4'>
-          <h3 className='font-semibold text-lg md:text-xl'>Dairy, Bread & Eggs</h3>
-          <Link to="" className='text-green-600 hover:text-grenn-400'>See All</Link>
-        </div>
-        <div>
-          
-        </div>
-      </div>
+      {
+        categoryData.map((c,index)=>{
+          <CategoryWiseProductDisplay key={c?._id+"CategorywiseProduct"} id={c?._id} name={c?.name}/>
+
+        })
+      }
 
     </section>
   )

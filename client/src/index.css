@@ -4,9 +4,17 @@
 @tailwind components;
 @tailwind utilities;
 
+html{
+    scroll-behavior: smooth;
+}
+
 body{
     font-family: "Poppins", serif;
     font-weight: 100;
     font-style: normal;
-    @apply bg-blue-300 text-neutral-700
+    @apply bg-blue-300 text-neutral-700 scroll-smooth
+}
+
+.scrollbar-none::-webkit-scrollbar{
+    display: none;
 }

@@ -21,7 +21,7 @@ const Home = () => {
       return filterData ? true : null
     })
   
-    const url = `/${validURLConvert(cat)}-${id}/${validURLConvert(subcategory.name)}-${subcategory._id}`
+    const url = `/${validURLConvert(cat)}-${_id}/${validURLConvert(subcategory.name)}-${subcategory._id}`
     
     navigate(url)
   }

@@ -1,9 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import {useParams} from 'react-router-dom'
 import SummaryApi from '../common/SummaryApi'
 import Axios from "../utils/Axios"
 import AxiosToastError from '../utils/AxiosToastError'
-
+import { FaAngleRight } from "react-icons/fa";
+import { FaAngleLeft } from "react-icons/fa";
+import Divider from '../components/Divider'
+import image1 from '../assets/minute_delivery.png'
+import image2 from '../assets/Best_Prices_Offers.png'
+import image2 from '../assets/Wide_Assortment.png'
 
 const ProductDisplayPage = () => {
   const params = useParams()
@@ -14,6 +19,7 @@ const ProductDisplayPage = () => {
   })
   const [image ,setImage] = useState(0)
   const [loading, setLoading] = useState(false)
+  const imageContainer =useRef
 
   const fetchProductDetails = async()=>{
     try {
@@ -41,10 +47,17 @@ const ProductDisplayPage = () => {
     fetchProductDetails()
   },[params])
 
+  const handleScrollRight = ()=>{
+    imageContainer.current.scrollLeft += 100
+  }
+
+  const handleScrollLeft = ()=>{
+    imageContainer.current.scrollLeft -= 100
+  }
   return (
     <section className='container mx-auto p-4 grid lg:grid-cols-2'>
       <div className=''>
-        <div className='bg-white min-h-[70vh] lg:max-h-[70vh] roundedmax-h-56 h-full w-full'>
+        <div className='bg-white min-h-[65vh] lg:max-h-[65vh] roundedmax-h-56 h-full w-full'>
           <img src={data.image[image]} alt="" className='w-full h-full object-scale-down'/>
         </div>
         <div className='flex items-center justify-center gap-3 my-2'>
@@ -56,8 +69,8 @@ const ProductDisplayPage = () => {
             })
           }
         </div>
-          <div className='grid'>
-            <div className='flex gap-4 w-full overflow-x-auto scrollbar-none'>
+          <div className='grid relative'>
+            <div ref={imageContainer} className='flex gap-4 z-10 w-full overflow-x-auto scrollbar-none'>
               {
                 data.image.map((img,index)=>{
                   return(
@@ -68,11 +81,65 @@ const ProductDisplayPage = () => {
                 })
               }
             </div>
+            <div className='w-full h-full -ml-3 flex justify-between absolute items-center'>
+              <button className='z-10 bg-white relative p-1 rounded-full shadow-lg'>
+                <FaAngleLeft onClick={handleScrollLeft}/>
+              </button>
+              <button lassName='z-10 bg-white relative p-1 rounded-full shadow-lg'>
+                <FaAngleRight onClick={handleScrollRight}/>
+              </button>
+            </div>
+          </div>
+          <div>
+
           </div>
       </div>
 
-      <div>
+      <div className='p-4 lg:pl-7 text-base lg:text-lg'>
+        <p className='bg-green-300 w-fit px-2 rounded-full'>10Min</p>
+        <h2 className='text-lg font-semibold lg:text-3xl'>{data.name}</h2>
+        <p className=''>{data.unit}</p>
+        <Divider/>
+        <div>
+          <p className=''>Price</p>
+          <div className='border border-green-600 px-4 py-2 rounded bg-green-50 w-fit'>
+            <p className='font-semibold text-lg lg:text-xl'>{DisplayPriceInTaka(data.price)}</p>
+          </div>
+        </div>
+        {
+          data.stock === 0 ? (
+            <p className='text-lg text-red-500'>Out of stock</p>
+          ) : (
+            <button className='my-4 px-4 py-1 bg-green-600 hover:bg-green-700 text-white rounded'>Add</button>
+          )
+        }
+        
+        <h2 className='font-semibold'>Why shop from Buzzer?</h2>
+        <div>
+          <div className='flex items-center gap-4 my-4'>
+            <img src={image1} alt="superfast delivery" className='w-20 h-20'/>
+            <div className='text-sm'>
+              <div className='font-semibold'>Superfast Delivery</div>
+              <p>Get your order deivered to your doorstep at the earliest from dark store</p>
+            </div>
+          </div>
 
+          <div className='flex items-center gap-4 my-4'>
+            <img src={image2} alt="Best Prices Offers" className='w-20 h-20'/>
+            <div className='text-sm'>
+              <div className='font-semibold'>Best Prices 7 Offers</div>
+              <p>Best Price destination with offers firectly from the manufactures</p>
+            </div>
+          </div>
+
+          <div className='flex items-center gap-4 my-4'>
+            <img src={image3} alt="Wide Assortment" className='w-20 h-20'/>
+            <div className='text-sm'>
+              <div className='font-semibold'>Wide Assortment</div>
+              <p>Choose from 5000+ products across food personal care, household & other categories</p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   )

@@ -4,6 +4,7 @@ import Axios from '../utils/Axios'
 import Loading from '../components/Loading'
 import ProductCardAdmin from '../components/ProductCardAdmin'
 import { IoSearch } from "react-icons/io5";
+import EditProductAdmin from '../components/EditProductAdmin'
 
 
 const [productData, setProductData] = useState([])
@@ -93,7 +94,7 @@ const ProductAdmin = () => {
                         {
                             productData.map((product, index) => {
                                 return (
-                                    <ProductCardAdmin data={product} />
+                                    <ProductCardAdmin data={product} fetchProductData={fetchProductData}/>
                                 )
                             })
                         }
@@ -110,7 +111,7 @@ const ProductAdmin = () => {
                     >Next</button>
                 </div>
             </div>
-
+            
         </section>
     )
 }

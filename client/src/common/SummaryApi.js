@@ -101,6 +101,10 @@ const SummaryApi = {
     updateProductDetails : {
         url : "/api/product/update-product-details",
         method : "put"
+    },
+    deleteProduct : {
+        url : '/delete-product',
+        method : 'delete'
     }
 }
 

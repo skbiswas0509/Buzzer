@@ -13,7 +13,7 @@ const Home = () => {
   const navigate = useNavigate()
   
   const handleRedirectProductListPage = (id, cat)=>{
-    const subcategory = subCategoryData.fin(sub =>{
+    const subcategory = subCategoryData.find(sub =>{
       const filter = sub.category.some(c => {
         return c._id == id
       })

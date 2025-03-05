@@ -20,4 +20,4 @@ const cartProductSchema = new mongoose.Schema({
 
 const cartProductModel = mongoose.model("CartProduct", cartProductSchema)
 
-export default cartProductSchema
+export default cartProductModel

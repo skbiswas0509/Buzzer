@@ -14,6 +14,17 @@ export const addToCartItemController = async(request, response)=>{
             })
         }
 
+        const checkItemCart = await cartProductModel.findOne({
+            userId : userId,
+            productId : productId
+        })
+
+        if(checkItemCart){
+            return response.status(400).json({
+                message : "Item already in cart"
+            })
+        }
+
         const cartItem  = new cartProductModel({
             quantity : 1,
             userId : userId,
@@ -35,6 +46,59 @@ export const addToCartItemController = async(request, response)=>{
             sucess : true
         })
 
+    } catch (error) {
+        return response.status(500).json({
+            message : error.message || error,
+            error : true,
+            success : false
+        })
+    }
+}
+
+export const getCartItemController = async(request, response)=>{
+    try {
+        const userId = request.userId
+
+        const cartItem = await cartProductModel.find({
+            userId : userId,
+        }).populate('productId')
+
+        return response.json({
+            data : cartItem,
+            error : false,
+            sucess : true
+        })
+    } catch (error) {
+        return response.status(500).json({
+            message : error.message || error,
+            error : true,
+            sucess : false
+        })
+    }
+}
+
+export const updateCartItemQtyController = async(request, response)=>{
+    try {
+        const userId = request.userId
+        const { _id,qty } = request.body
+
+        if(!_id || !qty){
+            return response.status(400).json({
+                messsage : "Provide _id, qty"
+        })
+        }
+        const updateCartItem = await cartProductModel.updateOne({
+            _id : _id
+        },{
+            quantity : qty
+        })
+
+        return response.json({
+            message : 'Item added',
+            error : false,
+            sucess : false,
+            data : updateCartItem
+        })
     } catch (error) {
         return response.status(500).json({
             message : error.message || error,

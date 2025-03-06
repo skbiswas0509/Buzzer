@@ -26,7 +26,7 @@ const auth = async(request, response, next)=>{
 
     } catch (error) {
         return response.status(500).json({
-            message: error.message || error,
+            message: "Login first", //error.message || error,
             error: true,
             success: false
         })

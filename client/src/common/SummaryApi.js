@@ -113,6 +113,14 @@ const SummaryApi = {
     addToCart : {
         url : "/api/cart/create",
         method : "post"
+    },
+    getCartItem : {
+        url : "/api/cart/get",
+        method : "get"
+    },
+    updateCartItemQty : {
+        url : "/api/cart/update-qty",
+        method : "put"
     }
 }
 

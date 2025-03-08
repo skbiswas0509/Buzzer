@@ -27,20 +27,29 @@ const AddToCartButton = ({ data }) => {
 
     }, [data, cartItem])
 
-    const increaseQty = (e) => {
+    const increaseQty = async(e) => {
         e.preventDefault()
         e.stopPropagation()
 
-        updateCartItem(cartItemDetails?._id,qty+1)
+        const response = await updateCartItem(cartItemDetails?._id,qty+1)
+        
+        if(response.success){
+            toast.success("Item added")
+        }
     }
 
-    const decreseQty = () => {
+    const decreseQty = async() => {
         e.preventDefault()
         e.stopPropagation()
         if(qty == 1){
             deleteCartItem(cartItemDetails?._id)
         }
-        updateCartItem(cartItemDetails?._id,qty-1)
+         const response = await updateCartItem(cartItemDetails?._id,qty-1)
+
+        if(response.success){
+
+        }
+
     }
 
     const handleAddToCart = async (e) => {
@@ -60,11 +69,11 @@ const AddToCartButton = ({ data }) => {
 
             if (responseData.success) {
                 toast.success(responseData.success)
-                if (fetchCartItem) {
-                    fetchCartItem
-                }
+                    fetchCartItem()
+                    return responseData
             }
         } catch (error) {
+            return error
             AxiosToastError(error)
         } finally {
             setLoading(false)

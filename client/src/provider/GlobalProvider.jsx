@@ -14,6 +14,7 @@ export const useGlobalContext = ()=>useContext(GlobalContext)
 const GlobalProvider = ({children})=>{
     const dispatch = useDispatch()
     const [totalPrice, setTotalPrice] = useState(0)
+    const [notDiscountTotalPrice, setNotDiscountTotalPrice] = useState(0)
     const [totalQty, setTotalQty] = useState(0)
     const cartItem = useSelector(state => state.cartItem.cart)
 
@@ -65,7 +66,7 @@ const GlobalProvider = ({children})=>{
 
         const {data : responseData} = response
         if(responseData.sucess){
-          toast.success(responseData.message)
+          // toast.success(responseData.message)
           fetchCartItem()
         }
       } catch (error) {
@@ -88,6 +89,11 @@ const GlobalProvider = ({children})=>{
           return preve + (priceAfterDiscount * curr.quantity)
         },0)
         setTotalPrice(tPrice)
+
+        const notDiscountPrice = cartItem.reduce((preve,curr)=>{
+          return preve + (curr?.productId?.price * curr.quantity)
+        },0)
+        setNotDiscountTotalPrice(notDiscountTotalPrice)
       },[cartItem])
 
     return(
@@ -96,7 +102,8 @@ const GlobalProvider = ({children})=>{
           updateCartItem,
           deleteCartItem,
           totalPrice,
-          totalQty
+          totalQty,
+          notDiscountTotalPrice
         }}>
             {children}
         </GlobalContext.Provider>

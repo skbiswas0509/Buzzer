@@ -95,7 +95,7 @@ export const updateCartItemQtyController = async(request, response)=>{
         })
 
         return response.json({
-            message : 'Item added',
+            message : 'Updated Cart',
             error : false,
             sucess : false,
             data : updateCartItem

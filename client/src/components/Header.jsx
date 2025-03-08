@@ -125,7 +125,7 @@ const Header = () => {
                   {/* add to cart icon */}
                   <IoCartSharp size={26} />
                 </div>
-                <div className="font-semibold">
+                <div className="font-semibold text-sn">
                   {
                     cartItem[0] ? (
                       <div>
@@ -149,7 +149,7 @@ const Header = () => {
 
       {
         openCartSection && (
-          <DisplayCartItem/>
+          <DisplayCartItem close={()=>{setOpenCartSection(false)}}/>
         )
       }
     </header>

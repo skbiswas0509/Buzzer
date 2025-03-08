@@ -11,6 +11,8 @@ import useSelector from "react-redux";
 import { useState } from "react";
 import UserMenu from "./UserMenu";
 import { DisplayPriceInTaka } from "../utils/DisplayPriceInTaka";
+import { useGlobalContext } from "../provider/GlobalProvider";
+import DisplayCartItem from "./DisplayCartItem";
 
 const Header = () => {
   const [isMobile] = useMobile();
@@ -20,8 +22,10 @@ const Header = () => {
   const user = useSelector((state) => state?.user);
   const [openUserMenu, setOpenUserMenu] = useState(false);
   const cartItem = useSelector(state => state.cartItem.cart)
-  const [totalPrice, setTotalPrice] = useState(0)
-  const [totalQty, setTotalQty] = useState(0)
+  // const [totalPrice, setTotalPrice] = useState(0)
+  // const [totalQty, setTotalQty] = useState(0)
+  const { totalPrice,totalQty } = useGlobalContext()
+  const [openCartSection, setOpenCartSection] = useState(false)
 
   const redirectToLoginPage = () => {
     navigate("/login");
@@ -41,17 +45,17 @@ const Header = () => {
   }
 
   //total items and total price
-  useEffect(()=>{
-    const qty = cartItem.reduce((preve,curr)=>{
-      return preve + curr.quantity
-    },0)
-    setTotalQty(qty)
+  // useEffect(()=>{
+  //   const qty = cartItem.reduce((preve,curr)=>{
+  //     return preve + curr.quantity
+  //   },0)
+  //   setTotalQty(qty)
     
-    const tPrice = cartItem.reduce((preve,curr)=>{
-      return preve + (curr.productId.price * curr.quantity)
-    },0)
-    setTotalPrice(tPrice)
-  },[cartItem])
+  //   const tPrice = cartItem.reduce((preve,curr)=>{
+  //     return preve + (curr.productId.price * curr.quantity)
+  //   },0)
+  //   setTotalPrice(tPrice)
+  // },[cartItem])
 
   return (
     <header className="h-24 lg:h-20 lg:shadow-md sticky top-0 z-40 flex flex-col justify-center gap-1 bg-white">
@@ -116,7 +120,7 @@ const Header = () => {
                   Login
                 </button>
               )}
-              <button className="flex items-center gap-2 bg-green-800 hover:bg-green-700 px-4 py-3 rounded text-white">
+              <button onClick={()=>setOpenCartSection(true)} className="flex items-center gap-2 bg-green-800 hover:bg-green-700 px-4 py-2 rounded text-white">
                 <div className="animate-bounce">
                   {/* add to cart icon */}
                   <IoCartSharp size={26} />
@@ -142,6 +146,12 @@ const Header = () => {
       <div className="container mx-auto px-2 lg:hidden">
         <Search />
       </div>
+
+      {
+        openCartSection && (
+          <DisplayCartItem/>
+        )
+      }
     </header>
   );
 };

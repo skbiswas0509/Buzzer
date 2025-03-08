@@ -88,7 +88,8 @@ export const updateCartItemQtyController = async(request, response)=>{
         })
         }
         const updateCartItem = await cartProductModel.updateOne({
-            _id : _id
+            _id : _id,
+            userId : userId
         },{
             quantity : qty
         })
@@ -104,6 +105,36 @@ export const updateCartItemQtyController = async(request, response)=>{
             message : error.message || error,
             error : true,
             success : false
+        })
+    }
+}
+
+export const deleteCartItemQtyController = async(request, response)=>{
+    try {
+        const userId = request.userId
+        const {_id } = request.body
+
+        if(!_id){
+            return response.status(400).json({
+                messahe : "Please provide _id",
+                error : true,
+                sucess : false
+            })
+        }
+
+        const deleteCartItem = await cartProductModel.deleteOne({_id : _id, userId : userId})
+
+        return response.json({
+            messsage : "Item removed",
+            error : false,
+            sucess : true,
+            data : deleteCartItem
+        })
+    } catch (error) {
+        return response.status(500).json({
+            message : error.message || error,
+            error : true,
+            sucess : false
         })
     }
 }

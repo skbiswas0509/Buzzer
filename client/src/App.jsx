@@ -11,7 +11,8 @@ import Axios from "./utils/Axios";
 import SummaryApi from "./common/SummaryApi";
 import { handleAddItemCart } from "./store/cartProduct";
 import GlobalProvider from "./provider/GlobalProvider";
-
+import { FaCartShopping } from "react-icons/fa6";
+import CardMobileLink from "./components/CardMobileLink";
 
 function App() {
 
@@ -27,7 +28,7 @@ function App() {
     try {
       dispatch(setLoadingCategory(true))
       const response = await Axios({
-        ...SummaryApi.getCatgory
+        ...SummaryApi.getCatgorys
       })   
       const {data : responseData} = response
 
@@ -74,6 +75,7 @@ function App() {
       </main>
       <Footer/>
       <Toaster/>
+        <CardMobileLink/>
     </GlobalProvider>
   );
 }

@@ -73,8 +73,8 @@ const AddToCartButton = ({ data }) => {
                     return responseData
             }
         } catch (error) {
-            return error
             AxiosToastError(error)
+            return error
         } finally {
             setLoading(false)
         }

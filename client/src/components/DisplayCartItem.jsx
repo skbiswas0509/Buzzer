@@ -7,7 +7,7 @@ import { FaCaretRight } from "react-icons/fa";
 import { useSelector } from 'react-redux'
 import AddToCartButton from './AddToCartButton'
 import { priceWithDiscount } from '../utils/PriceWithDiscount'
-import imageEmpty from "../assets/Image/empty_cart.webp"
+import imageEmpty from "../assets/empty_cart.webp"
 
 const DisplayCartItem = ({ close }) => {
   const { notDiscountTotalPrice, totalPrice, totalQty } = useGlobalContext()

@@ -1,6 +1,6 @@
-const baseURL = "http://localhost:8080"
+export const baseURL = "http://localhost:8080"
 
-const SummaryApi = {
+export const SummaryApi = {
     register : {
         url : '/api/user/register',
         method : 'post'
@@ -127,5 +127,3 @@ const SummaryApi = {
         method : 'delete'
     }
 }
-
-export default {SummaryApi, baseURL}

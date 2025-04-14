@@ -45,7 +45,7 @@ const productSchema = new mongoose.Schema({
         default: {}
     },
     publish: {
-        type: boolean,
+        type: Boolean,
         default: true
     },
 }, {

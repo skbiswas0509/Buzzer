@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { IoMdEye, IoMdEyeOff } from "react-icons/io";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { SummaryApi } from "../common/SummaryApi";
 import AxiosToastError from "../utils/AxiosToastError";
 import Axios from "../utils/Axios";
+import SummaryApi from "../common/SummaryApi";
 
 const ResetPassword = () => {
   const location = useLocation();

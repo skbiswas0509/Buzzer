@@ -4,7 +4,6 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import toast, { Toaster } from 'react-hot-toast';
 import fetchUserDetails from "./utils/fetchUserDetails";
-import { setUserDetail } from "./store/userSlice";
 import { useDispatch } from "react-redux";
 import { setAllCategory,setAllSubCategory, setLoadingCategory } from "./store/productSlice";
 import Axios from "./utils/Axios";
@@ -13,6 +12,8 @@ import { handleAddItemCart } from "./store/cartProduct";
 import GlobalProvider from "./provider/GlobalProvider";
 import { FaCartShopping } from "react-icons/fa6";
 import CardMobileLink from "./components/CardMobileLink";
+import { setUserDetails } from "./store/userSlice";
+import { useEffect } from "react";
 
 function App() {
 
@@ -21,7 +22,7 @@ function App() {
   const fetchUser = async ()=>{
     const userData = await fetchUserDetails
     console.log("userData", userData.data)
-    dispatch(setUserDetail(userData.data))
+    dispatch(setUserDetails(userData.data))
   }
 
   const fetchCategory = async()=>{

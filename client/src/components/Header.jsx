@@ -7,12 +7,12 @@ import { VscTriangleDown } from "react-icons/vsc";
 import { VscTriangleUp } from "react-icons/vsc";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useMobile from "../hooks/useMobile";
-import useSelector from "react-redux";
 import { useState } from "react";
 import UserMenu from "./UserMenu";
 import { DisplayPriceInTaka } from "../utils/DisplayPriceInTaka";
 import { useGlobalContext } from "../provider/GlobalProvider";
 import DisplayCartItem from "./DisplayCartItem";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const [isMobile] = useMobile();
